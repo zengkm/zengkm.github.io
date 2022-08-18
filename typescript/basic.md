@@ -1,6 +1,6 @@
-## 断言
+# 断言
 > 没有运行时的影响，只是在编译阶段起作用 
-### 1. 类型断言
+## 1. 类型断言
 尖括号语法:
 ```typescript
 let someValue: any = "this is a string";
@@ -11,7 +11,7 @@ as语法:
 let someValue: any = "this is a string";
 let strLength: number = (someValue as string).length;
 ```
-### 2. 非空断言  
+## 2. 非空断言  
 > x! 将从 x 值域中排除 null 和 undefined  
  
 忽略undefined 和 null 类型：
@@ -34,7 +34,7 @@ function myFunc(numGenerator: NumGenerator | undefined) {
   const num2 = numGenerator!(); //OK
 }
 ```
-### 3. 确定赋值断言
+## 3. 确定赋值断言
 > 在实例属性和变量声明后面放置一个 ! 号，从而告诉 TypeScript 该属性会被明确地赋值  
 ```typescript
 let x!: number;
@@ -45,8 +45,50 @@ function initialize() {
   x = 10;
 }
 ```
+
+# 泛型(Generic)
+> 泛型用来来创建可重用的组件，一个组件可以支持多种类型的数据。这样用户就可以以自己的数据类型来使用组件。**简单的说，“泛型就是把类型当成参数”**。  
+> 
+> In languages like C# and Java, one of the main tools in the toolbox for creating reusable components is generics, that is, being able to create a component that can work over a variety of types rather than a single one. This allows users to consume these components and use their own types.  
+
+## 类型作为参数
+```typescript
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+// the identity function is generic, as it works over a range of types
+```
+调用方法有两种：
+* `let output = identity<string>("myString"); // 传入类型参数` 
+* `let output = identity("myString"); // 利用typescript的类型推断`
+## 泛型Types(Generic Types)
+``` typescript
+interface GenericIdentityFn<Type> {
+  (arg: Type): Type;
+}
+ 
+function identity<Type>(arg: Type): Type {
+  return arg;
+}
+
+let myIdentity: GenericIdentityFn<number> = identity;
+```
+## 泛型classes
+```typescript
+class GenericNumber<NumType> {
+  zeroValue: NumType;
+  add: (x: NumType, y: NumType) => NumType;
+}
+ 
+let myGenericNumber = new GenericNumber<number>();
+myGenericNumber.zeroValue = 0;
+myGenericNumber.add = function (x, y) {
+  return x + y;
+};
+```
 ## 泛型约束
 > 有时候我们定义的泛型不想过于灵活或者说想继承某些类等，可以通过 extends 关键字添加泛型约束。
+
 ```typescript
 interface Lengthwise {
   length: number;
