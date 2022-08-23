@@ -45,7 +45,38 @@ function initialize() {
   x = 10;
 }
 ```
-
+# 索引访问类型（Indexed Access Types）
+通过访问一个类型的特定属性，获取到一个新的类型
+```typescript
+type Person = { age: number; name: string; alive: boolean };
+type Age = Person["age"];
+// type Age = number
+```
+索引本身也是一个类型，因为也可以用联合类型、keyof、或者其他类型作为索引。
+```typescript
+type I1 = Person["age" | "name"];
+     
+// type I1 = string | number
+ 
+type I2 = Person[keyof Person];
+     
+// type I2 = string | number | boolean
+ 
+type AliveOrName = "alive" | "name";
+type I3 = Person[AliveOrName];
+     
+// type I3 = string | boolean
+```
+使用number作为索引，获取数组元素的类型
+```typescript
+const MyArray = [
+  { name: "Alice", age: 15 },
+  { name: "Bob", age: 23 },
+  { name: "Eve", age: 38 },
+];
+ 
+type Person = typeof MyArray[number];
+```
 # 泛型(Generic)
 > 泛型用来来创建可重用的组件，一个组件可以支持多种类型的数据。这样用户就可以以自己的数据类型来使用组件。**简单的说，“泛型就是把类型当成参数”**。  
 > 
