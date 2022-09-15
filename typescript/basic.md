@@ -92,16 +92,15 @@ function identity<Type>(arg: Type): Type {
 调用方法有两种：
 * `let output = identity<string>("myString"); // 传入类型参数` 
 * `let output = identity("myString"); // 利用typescript的类型推断`
+
 ## 泛型Types(Generic Types)
 ``` typescript
 interface GenericIdentityFn<Type> {
   (arg: Type): Type;
 }
- 
 function identity<Type>(arg: Type): Type {
   return arg;
 }
-
 let myIdentity: GenericIdentityFn<number> = identity;
 ```
 ## 泛型classes
@@ -151,6 +150,26 @@ type Animal = {
 }
 type Bear = Animal & { 
   honey: boolean 
+}
+```
+## extends和intersections的区别
+这两个方式组合类型非常相似，只有细微的区别。两者之间的主要区别在于如何处理冲突。extends关键词的继承不能有相同的属性名，intersections对相同的属性名取交集。
+```typescript
+type Colorful = {
+  color: string;
+  radius: string | number;
+}
+interface Circle {
+  radius: number;
+}
+type ColorfulCircle1 = Colorful & Circle;
+
+export interface ColorfulCircle2 extends Colorful , Circle {}
+// error: Interface 'ColorfulCircle2' cannot simultaneously extend types 'Colorful' and 'Circle'. Named property 'radius' of types 'Colorful' and 'Circle' are not identical.
+
+const a: ColorfulCircle1 = {
+  color: 'red',
+  radius: 2,
 }
 ```
 # Utility Types
@@ -267,3 +286,8 @@ class C {
 }
 type T0 = InstanceType<typeof C>;  // C
 ```
+
+***
+
+### 参考文档
+[一份不可多得的 TS 学习指南](https://juejin.cn/post/6872111128135073806#heading-29)
