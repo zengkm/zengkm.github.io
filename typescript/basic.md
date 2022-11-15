@@ -289,5 +289,21 @@ type T0 = InstanceType<typeof C>;  // C
 
 ***
 
+# 拓展
+[type-challenges](https://github.com/type-challenges/type-challenges)
+
+### [Implement a generic Last<T> that takes an Array T and returns its last element](https://github.com/type-challenges/type-challenges/tree/main/questions/00015-medium-last).
+```typescript
+type arr1 = ['a', 'b', 'c']
+type arr2 = [3, 2, 1]
+
+type tail1 = Last<arr1> // expected to be 'c'
+type tail2 = Last<arr2> // expected to be 1
+```
+
+
 ### 参考文档
-[一份不可多得的 TS 学习指南](https://juejin.cn/post/6872111128135073806#heading-29)
+[The TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/)  
+[一份不可多得的 TS 学习指南](https://juejin.cn/post/6872111128135073806#heading-29)  
+[一篇够用的TypeScript总结](https://juejin.cn/post/6981728323051192357)  
+[你以为学会TypeScript了？先看看这16道题能做对多少先！](https://juejin.cn/post/7110232056826691591)
