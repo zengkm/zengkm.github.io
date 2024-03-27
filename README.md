@@ -3,3 +3,4 @@
 3. [TypeScript类型](./typescript/basic.md)
 4. [JavaScript的编译与运行](./basic/javascriptAndBroswer.md)
 5. [web性能优化](./basic/webPerformanceOptimization.md)
+5. [vue2基础](./basic/vue2basic.md)
